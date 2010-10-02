@@ -1,3 +1,5 @@
+var map;
+
 $(document).ready(function() {
   initializeMap(document.getElementById("map_canvas"));
   initializeSocket();
@@ -16,7 +18,7 @@ function initializeMap(map_canvas) {
     disableDoubleClickZoom: false,
     mapTypeId: google.maps.MapTypeId.SATELLITE,
   }
-  var map = new google.maps.Map(map_canvas, myOptions);
+  map = new google.maps.Map(map_canvas, myOptions);
 }
 
 function drawMap(json_object) {
@@ -62,8 +64,11 @@ function initializeSocket() {
   socket.connect();
   socket.on('message', function(obj){
     var json_data = JSON.parse(obj);
-    console.log(json_data);
-    drawMap(json_data);
+    if (json_data.coor1 && json_data.coor2)
+      alert("yo");
+    
+    if (json_data.type == 2)
+      drawMap(json_data);
   });
 }
 

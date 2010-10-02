@@ -125,7 +125,7 @@ function webJson(mapPara, monsters) {
   }
   tempMap[player[0]][player[1]] = 1;
   
-  return "{\"map\":"+JSON.stringify(tempMap)+",\"wall\":"+JSON.stringify(wall)+"}";
+  return "{\"type\":2,\"map\":"+JSON.stringify(tempMap)+",\"wall\":"+JSON.stringify(wall)+"}";
 }
 
 function mapJson(mapPara, monsters) {
