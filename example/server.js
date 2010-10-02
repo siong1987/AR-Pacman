@@ -78,18 +78,22 @@ var net = require('net'),
 	         [3, 3, 3, 3, 3],
 	         [3, 3, 3, 3, 3],
 	         [3, 3, 3, 3, 3]],
-	 monster1 = [0, 4],
-	 monster2 = [1, 3],
+	 //monster1 = [0, 4],
+	 //monster2 = [1, 3],
+	 monsters = [[0, 4], [1, 3]];
 	 wall = [[[0, 0], [0, 0], [0, 1], [0, 1], [0, 0]],
 	         [[1, 0], [0, 1], [0, 1], [1, 0], [0, 0]],
 	         [[1, 0], [0, 0], [0, 1], [1, 0], [0, 0]],
 	         [[0, 1], [0, 0], [0, 0], [0, 1], [0, 0]],
 	         [[0, 0], [1, 0], [0, 0], [0, 0], [0, 0]]];
 	         
-function mapJson(mapPara, monA, monB) {
+function mapJson(mapPara, monsters) {
   var tempMap = mapPara;
-  tempMap[monA[1]][monA[2]] = 2;
-  tempMap[monB[1]][monB[2]] = 2;
+  //tempMap[monA[1]][monA[0]] = 2;
+  //tempMap[monB[1]][monB[0]] = 2;
+  for (var i=0; i<monsters.length; i++) {
+    tempMap[monsters[i][1]][monsters[i][0]] = 2;
+  }
   
   console.log(tempMap);
   
@@ -107,10 +111,10 @@ var iphone = net.createServer(function (stream) {
       globalClient.send(data);
       if (map[json_data.y][json_data.x] == 3)
         map[json_data.y][json_data.x] = 0;
-      stream.write(mapJson(map, monster1, monster2));
+      stream.write(mapJson(map, monsters));
     }
     
-    stream.write(mapJson(map, monster1, monster2));
+    stream.write(mapJson(map, monsters));
   });
   stream.on('end', function () {
     stream.write('goodbye\r\n');
