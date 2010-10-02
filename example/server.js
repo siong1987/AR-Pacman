@@ -204,11 +204,11 @@ var iphone = net.createServer(function (stream) {
   
   stream.on('data', function (data) {
     var json_data = JSON.parse(data);
+    console.log(json_data);
     if (json_data.type == 1) {
       player[1] = json_data.x;
       player[0] = json_data.y;
       
-      console.log(json_data);
       
       if (globalClient) globalClient.send(webJson(map, monsters));
       
