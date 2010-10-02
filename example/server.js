@@ -87,7 +87,7 @@ var net = require('net'),
 	         [[0, 0], [1, 0], [0, 0], [0, 0], [0, 0]]];
 	         
 function mapJson(mapPara, monsters) {
-  var tempMap = Array.new(mapPara);
+  var tempMap = mapPara.clone();
   for (var i=0; i<monsters.length; i++) {
     tempMap[monsters[i][0]][monsters[i][1]] = 2;
   }
