@@ -90,9 +90,14 @@ var iphone = net.createServer(function (stream) {
   stream.on('connect', function () {
   });
   stream.on('data', function (data) {
-    if (JSON.parse(data).type == 1) {
+    var json_data = JSON.parse(data);
+    if (json_data.type == 1) {
       console.log(data);
       globalClient.send(data);
+      if (map[json_data.x][json_data.y] == 3)
+        map[json_data.x][json_data.y] = 0;
+      console.log(map);
+      stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}\0");
     }
     
     stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}\0");
