@@ -91,7 +91,7 @@ var iphone = net.createServer(function (stream) {
     if (globalClient) globalClient.send({"x":1, "y": 2});
   });
   stream.on('data', function (data) {
-    stream.write("{'map':"+JSON.stringify(map)+",'wall':"+JSON.stringify(wall)+"}");
+    stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}");
   });
   stream.on('end', function () {
     stream.write('goodbye\r\n');
