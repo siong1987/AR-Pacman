@@ -150,6 +150,10 @@ function canwalk(x, y, dx, dy) {
   var x2 = x+dx, y2 = y+dy;
   if (x2<0 ||  x2>=5 || y2<0 || y2>=5)
     return false;
+  for (var i=0; i<monsters.length; i++) {
+    if (x2==monsters[i][1] && y2==monsters[i][0])
+      return false;
+  }
   if (dx < 0)
     return !wall[y][x-1][0];
   if (dx > 0)
