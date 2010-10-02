@@ -199,7 +199,7 @@ var iphone = net.createServer(function (stream) {
       monsters[i][0] = y;
     }
     stream.write(mapJson(map, monsters));
-  }, 1000);
+  }, 2000);
   
   stream.on('data', function (data) {
     var json_data = JSON.parse(data);
