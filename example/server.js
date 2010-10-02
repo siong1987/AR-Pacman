@@ -1,3 +1,5 @@
+var globalClient;
+
 var http = require('http'), 
 		url = require('url'),
 		fs = require('fs'),
@@ -16,6 +18,7 @@ server = http.createServer(function(req, res){
 			
 		case '/json.js':
 		case '/socket.js':
+    case '/pacman.js':
 			fs.readFile(__dirname + path, function(err, data){
 				if (err) return send404(res);
 				res.writeHead(200, {'Content-Type': 'text/javascript'})
@@ -24,6 +27,15 @@ server = http.createServer(function(req, res){
 			});
 			break;
 			
+    case '/pacman.css':
+			fs.readFile(__dirname + path, function(err, data){
+				if (err) return send404(res);
+				res.writeHead(200, {'Content-Type': 'text/css'})
+				res.write(data, 'utf8');
+				res.end();
+			});
+			break;
+
 		case '/chat.html':
 			fs.readFile(__dirname + path, function(err, data){
 				if (err) return send404(res);
@@ -48,20 +60,42 @@ server.listen(8080);
 // socket.io, I choose you
 // simplest chat application evar
 var io = io.listen(server),
-		buffer = [];
+		globalClient;
 		
 io.on('connection', function(client){
-	client.send({ buffer: buffer });
-	client.broadcast({ announcement: client.sessionId + ' connected' });
+  globalClient = client;
 
 	client.on('message', function(message){
-		var msg = { message: [client.sessionId, message] };
-		buffer.push(msg);
-		if (buffer.length > 15) buffer.shift();
-		client.broadcast(msg);
 	});
 
 	client.on('disconnect', function(){
-		client.broadcast({ announcement: client.sessionId + ' disconnected' });
 	});
 });
+
+var net = require('net'),
+	  map = [[3, 3, 3, 2, 3],
+	         [3, 3, 2, 3, 3],
+	         [3, 2, 3, 3, 3],
+	         [3, 3, 3, 3, 2],
+	         [3, 3, 3, 3, 3]],
+	 wall = [[[1, 0], [0, 0], [0, 1], [0, 1], [0, 0]],
+	         [[1, 0], [0, 1], [0, 1], [1, 0], [0, 0]],
+	         [[1, 0], [0, 0], [0, 1], [1, 0], [0, 0]],
+	         [[0, 1], [1, 0], [0, 0], [0, 1], [0, 0]],
+	         [[0, 0], [1, 0], [0, 0], [0, 0], [0, 0]]];
+	 
+var iphone = net.createServer(function (stream) {
+  stream.setEncoding('utf8');
+  stream.on('connect', function () {
+    stream.write("{'map':"+JSON.stringify(map)+",'wall':"+JSON.stringify(wall)+"}");
+    if (globalClient) globalClient.send({"x":1, "y": 2});
+  });
+  stream.on('data', function (data) {
+  });
+  stream.on('end', function () {
+    stream.write('goodbye\r\n');
+    stream.end();
+  });
+});
+iphone.listen(8124);
+

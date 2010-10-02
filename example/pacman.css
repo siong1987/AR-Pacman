@@ -1,0 +1,223 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px; 
+}
+
+#map_canvas {
+  height: 100%;
+}
+
+#maze {
+  position: absolute;
+  left: 300px;
+  top: 150px;
+  width: 800px;
+  height: 800px;
+  background-image: url('http://cdn.siong1987.com/pacman/maze.png');
+}
+
+#maze1 {
+  position: absolute;
+  left: 300px;
+  top: 150px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze2 {
+  position: absolute;
+  left: 460px;
+  top: 150px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze3 {
+  position: absolute;
+  left: 620px;
+  top: 150px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze4 {
+  position: absolute;
+  left: 780px;
+  top: 150px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze5 {
+  position: absolute;
+  left: 940px;
+  top: 150px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze6 {
+  position: absolute;
+  left: 300px;
+  top: 310px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze7 {
+  position: absolute;
+  left: 460px;
+  top: 310px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze8 {
+  position: absolute;
+  left: 620px;
+  top: 310px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze9 {
+  position: absolute;
+  left: 780px;
+  top: 310px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze10 {
+  position: absolute;
+  left: 940px;
+  top: 310px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze11 {
+  position: absolute;
+  left: 300px;
+  top: 470px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze12 {
+  position: absolute;
+  left: 460px;
+  top: 470px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze13 {
+  position: absolute;
+  left: 620px;
+  top: 470px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze14 {
+  position: absolute;
+  left: 780px;
+  top: 470px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze15 {
+  position: absolute;
+  left: 940px;
+  top: 470px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze16 {
+  position: absolute;
+  left: 300px;
+  top: 630px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze17 {
+  position: absolute;
+  left: 460px;
+  top: 630px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze18 {
+  position: absolute;
+  left: 620px;
+  top: 630px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze19 {
+  position: absolute;
+  left: 780px;
+  top: 630px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze20 {
+  position: absolute;
+  left: 940px;
+  top: 630px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze21 {
+  position: absolute;
+  left: 300px;
+  top: 790px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze22 {
+  position: absolute;
+  left: 460px;
+  top: 790px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze23 {
+  position: absolute;
+  left: 620px;
+  top: 790px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze24 {
+  position: absolute;
+  left: 780px;
+  top: 790px;
+  width: 160px;
+  height: 160px;
+}
+
+#maze25 {
+  position: absolute;
+  left: 940px;
+  top: 790px;
+  width: 160px;
+  height: 160px;
+}
+
