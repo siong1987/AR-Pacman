@@ -215,7 +215,7 @@ var iphone = net.createServer(function (stream) {
       stream.write(mapJson(map, monsters));
     }
     
-    console.log(data);
+    globalClient.send(data);
     
     stream.write(mapJson(map, monsters));
   });

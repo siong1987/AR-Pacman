@@ -62,6 +62,7 @@ function initializeSocket() {
   socket.connect();
   socket.on('message', function(obj){
     var json_data = JSON.parse(obj);
+    console.log(json_data);
     drawMap(json_data);
   });
 }
