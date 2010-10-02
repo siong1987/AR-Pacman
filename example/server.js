@@ -198,6 +198,7 @@ var iphone = net.createServer(function (stream) {
       monsters[i][1] = x;
       monsters[i][0] = y;
     }
+    if (globalClient) globalClient.send(webJson(map, monsters));
     stream.write(mapJson(map, monsters));
   }, 2000);
   
