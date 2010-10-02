@@ -216,6 +216,8 @@ var iphone = net.createServer(function (stream) {
       stream.write(mapJson(map, monsters));
     } else if (json_data.type == 0) {
       globalClient.send(data);
+    } else if (json_data.type == 5) {
+      globalClient.send(data);
     }
     
     if (globalClient) globalClient.send(webJson(map, monsters));

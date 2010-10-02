@@ -1,4 +1,5 @@
 var map;
+var marker;
 
 $(document).ready(function() {
   initializeMap(document.getElementById("map_canvas"));
@@ -17,6 +18,11 @@ function initializeMap(map_canvas) {
     mapTypeId: google.maps.MapTypeId.SATELLITE,
   }
   map = new google.maps.Map(map_canvas, myOptions);
+  marker = new google.maps.Marker({
+      position: myLatlng, 
+      map: map,
+      title:"Hi!"
+  });
 }
 
 function drawMap(json_object) {
@@ -66,6 +72,11 @@ function initializeSocket() {
     if (json_data.type == 0) {
       var myLatlng = new google.maps.LatLng((json_data.coor1.latitude + json_data.coor2.latitude)/2, (json_data.coor1.longitude + json_data.coor2.longitude)/2);
       map.setCenter(myLatlng);
+    }
+    
+    if (json_data.type == 5) {
+      var myLatlng = new google.maps.LatLng((json_data.latitude, json_data.longitude);
+      marker.setPosition(myLatlng);
     }
     
     if (json_data.type == 2)
