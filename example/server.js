@@ -149,7 +149,7 @@ function canwalk(x, y, dx, dy) {
     return !wall[y-1][x][1];
   if (dy > 0)
     return !wall[y][x][1];
-  return yes;
+  return true;
 }
 	 
 var iphone = net.createServer(function (stream) {
@@ -189,8 +189,8 @@ var iphone = net.createServer(function (stream) {
   stream.on('data', function (data) {
     var json_data = JSON.parse(data);
     if (json_data.type == 1) {
-      player[0] = json_data.x;
-      player[1] = json_data.y;
+      player[1] = json_data.x;
+      player[0] = json_data.y;
       
       globalClient.send(data);
       if (map[json_data.y][json_data.x] == 3)
