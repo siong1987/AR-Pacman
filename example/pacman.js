@@ -10,6 +10,10 @@ function initializeMap(map_canvas) {
   var myOptions = {
     zoom: 21,
     center: myLatlng,
+    disableDoubleClickZoom: false,
+    scrollwheel: false,
+    draggable: false,
+    disableDoubleClickZoom: false,
     mapTypeId: google.maps.MapTypeId.SATELLITE,
   }
   map = new google.maps.Map(map_canvas, myOptions);
