@@ -123,6 +123,7 @@ function mapJson(mapPara, monsters) {
   for (var i=0; i<monsters.length; i++) {
     tempMap[monsters[i][0]][monsters[i][1]] = 2;
   }
+  tempMap[player[0]][player[1]] = 1;
   
   console.log(tempMap);
   
