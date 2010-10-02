@@ -91,6 +91,8 @@ function mapJson(mapPara, monA, monB) {
   tempMap[monA[1]][monA[2]] = 2;
   tempMap[monB[1]][monB[2]] = 2;
   
+  console.log(tempMap);
+  
   return "{\"map\":"+JSON.stringify(tempMap)+",\"wall\":"+JSON.stringify(wall)+"}\0";
 };
 	 
@@ -102,11 +104,9 @@ var iphone = net.createServer(function (stream) {
   stream.on('data', function (data) {
     var json_data = JSON.parse(data);
     if (json_data.type == 1) {
-      console.log(data);
       globalClient.send(data);
       if (map[json_data.y][json_data.x] == 3)
         map[json_data.y][json_data.x] = 0;
-      console.log(map);
       stream.write(mapJson(map, monster1, monster2));
     }
     
