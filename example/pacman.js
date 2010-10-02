@@ -23,7 +23,6 @@ function initializeSocket() {
   var socket = new io.Socket(null, {port: 8080});
   socket.connect();
   socket.on('message', function(obj){
-    console.log(JSON.parse(obj).y);
     var index = (JSON.parse(obj).y)*5 + (JSON.parse(obj).x + 1);
     for (i=1;i<=25;i++) {
       $("#maze"+i).css("background-image", "url('http://cdn.siong1987.com/pacman/empty.png')");
