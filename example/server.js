@@ -92,7 +92,7 @@ function mapJson(mapPara, monsters) {
   //tempMap[monA[1]][monA[0]] = 2;
   //tempMap[monB[1]][monB[0]] = 2;
   for (var i=0; i<monsters.length; i++) {
-    tempMap[monsters[i][1]][monsters[i][0]] = 2;
+    tempMap[monsters[i][0]][monsters[i][1]] = 2;
   }
   
   console.log(tempMap);
