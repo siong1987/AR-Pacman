@@ -152,6 +152,8 @@ function canwalk(x, y, dx, dy) {
     return !wall[y][x][1];
   return true;
 }
+
+var interval;
 	 
 var iphone = net.createServer(function (stream) {
   stream.setEncoding('utf8');
@@ -159,7 +161,7 @@ var iphone = net.createServer(function (stream) {
   stream.on('connect', function () {
   });
   
-  setInterval(function () {
+  interval = setInterval(function () {
     for (var i=0; i<monsters.length; i++) {
       //monsters[i][0]++;
       var tries = [[0, 1], [0, -1], [1, 0], [-1, 0]];
@@ -193,7 +195,8 @@ var iphone = net.createServer(function (stream) {
       player[1] = json_data.x;
       player[0] = json_data.y;
       
-      globalClient.send(data);
+      if (globalClient) globalClient.send(data);
+      
       if (map[json_data.y][json_data.x] == 3)
         map[json_data.y][json_data.x] = 0;
       stream.write(mapJson(map, monsters));
@@ -202,6 +205,9 @@ var iphone = net.createServer(function (stream) {
     stream.write(mapJson(map, monsters));
   });
   stream.on('end', function () {
+    if(interval) {
+      clearInterval(interval);
+    }
     stream.write('goodbye\r\n');
     stream.end();
   });
