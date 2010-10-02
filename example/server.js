@@ -88,11 +88,13 @@ var iphone = net.createServer(function (stream) {
   stream.setEncoding('utf8');
   stream.write("{\"message\":\"yo!\"}");
   stream.on('connect', function () {
-    if (globalClient) globalClient.send({"x":1, "y": 2});
   });
   stream.on('data', function (data) {
     console.log(data);
-    console.log("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}");
+    if (data.x && data.y) {
+      if (globalClient) globalClient.send(data);
+    }
+    
     stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}\0");
   });
   stream.on('end', function () {

@@ -23,11 +23,11 @@ function initializeSocket() {
   var socket = new io.Socket(null, {port: 8080});
   socket.connect();
   socket.on('message', function(obj){
-    console.log(obj);
-    if (x in obj && y in obj) {
-      var index = (obj.y-1)*5 + (obj.x);
-      $("#maze"+index).css("background-image", "url('http://cdn.siong1987.com/pacman/maze.png'");
+    var index = (obj.y-1)*5 + (obj.x);
+    for (i=1;i<=25;i++) {
+      $("#maze"+index).css("background-image", "url('')");
     }
+    $("#maze"+index).css("background-image", "url('http://cdn.siong1987.com/pacman/maze.png')");
   });
 }
 
