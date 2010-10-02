@@ -8,15 +8,15 @@ Play with your iPhone. And, view it realtime on your web browser.
 
 IMPORTANT! When checking out the git repo, make sure to include the submodules. One way to do it is:
 
-	git clone [repo] --recursive
+    git clone [repo] --recursive
   
 Another, once cloned
 
-	git submodule update --init --recursive
+    git submodule update --init --recursive
 	
 Run:
   
-  cd server; node server.js
+    cd server; node server.js
   
 ## Notes
 
