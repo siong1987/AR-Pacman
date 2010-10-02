@@ -22,7 +22,7 @@ function initializeMap(map_canvas) {
 function drawMap(json_object) {
   var canvas = document.getElementById("maze");  
   var ctx = canvas.getContext("2d");  
-  //ctx.clearRect(0,0,800,800);
+  ctx.clearRect(0,0,800,800);
 
   for(i=0;i<5;i++) {
     for(j=0;j<5;j++) {
@@ -49,7 +49,6 @@ function initializeSocket() {
   socket.connect();
   socket.on('message', function(obj){
     var json_data = JSON.parse(obj);
-    console.log(json_data);
     drawMap(json_data);
   });
 }
