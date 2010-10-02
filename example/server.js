@@ -72,6 +72,38 @@ io.on('connection', function(client){
 	});
 });
 
+function clone_obj(obj) {
+  if (typeof obj !== 'object' || obj == null) {
+    return obj;
+  }
+ 
+  var c = obj instanceof Array ? [] : {};
+ 
+  for (var i in obj) {
+    var prop = obj[i];
+ 
+    if (typeof prop == 'object') {
+      if (prop instanceof Array) {
+        c[i] = [];
+ 
+        for (var j = 0; j < prop.length; j++) {
+          if (typeof prop[j] != 'object') {
+            c[i].push(prop[j]);
+          } else {
+            c[i].push(clone_obj(prop[j]));
+          }
+        }
+           } else {
+               c[i] = clone_obj(prop);
+           }
+        } else {
+           c[i] = prop;
+        }
+    }
+ 
+    return c;
+};
+
 var net = require('net'),
 	  map = [[3, 3, 3, 3, 3],
 	         [3, 3, 3, 3, 3],
@@ -85,9 +117,9 @@ var net = require('net'),
 	         [[1, 0], [0, 0], [0, 1], [1, 0], [0, 0]],
 	         [[0, 1], [0, 0], [0, 0], [0, 1], [0, 0]],
 	         [[0, 0], [1, 0], [0, 0], [0, 0], [0, 0]]];
-	         
+
 function mapJson(mapPara, monsters) {
-  var tempMap = mapPara.clone();
+  var tempMap = clone_obj(mapPara);
   for (var i=0; i<monsters.length; i++) {
     tempMap[monsters[i][0]][monsters[i][1]] = 2;
   }
