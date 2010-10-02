@@ -94,8 +94,8 @@ var iphone = net.createServer(function (stream) {
     if (json_data.type == 1) {
       console.log(data);
       globalClient.send(data);
-      if (map[json_data.x][json_data.y] == 3)
-        map[json_data.x][json_data.y] = 0;
+      if (map[json_data.y][json_data.x] == 3)
+        map[json_data.y][json_data.x] = 0;
       console.log(map);
       stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}\0");
     }
