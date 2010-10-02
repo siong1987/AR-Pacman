@@ -12,7 +12,7 @@ server = http.createServer(function(req, res){
 	switch (path){
 		case '/':
 			res.writeHead(200, {'Content-Type': 'text/html'});
-			res.write('<h1>Welcome. Try the <a href="/chat.html">chat</a> example.</h1>');
+			res.write('<h1>Welcome. Please go to the <a href="/map.html">map</a>.</h1>');
 			res.end();
 			break;
 			
@@ -36,7 +36,7 @@ server = http.createServer(function(req, res){
 			});
 			break;
 
-		case '/chat.html':
+		case '/map.html':
 			fs.readFile(__dirname + path, function(err, data){
 				if (err) return send404(res);
 				res.writeHead(200, {'Content-Type': 'text/html'})
