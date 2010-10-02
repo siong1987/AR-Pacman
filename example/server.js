@@ -94,7 +94,7 @@ var iphone = net.createServer(function (stream) {
     console.log(JSON.parse(data).type);
     if (JSON.parse(data).type == 1) {
       console.log(data);
-      if (globalClient) globalClient.send(data);
+      globalClient.send(data);
     }
     
     stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}\0");
