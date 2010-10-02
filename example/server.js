@@ -55,7 +55,7 @@ send404 = function(res){
 	res.end();
 };
 
-server.listen(8080, '173.230.144.210');
+server.listen(8080);
 		
 // socket.io, I choose you
 // simplest chat application evar
@@ -87,11 +87,11 @@ var net = require('net'),
 var iphone = net.createServer(function (stream) {
   stream.setEncoding('utf8');
   stream.on('connect', function () {
-    stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}");
     if (globalClient) globalClient.send({"x":1, "y": 2});
   });
   stream.on('data', function (data) {
     console.log(data);
+    stream.write(data);
     stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}");
   });
   stream.on('end', function () {
@@ -99,5 +99,5 @@ var iphone = net.createServer(function (stream) {
     stream.end();
   });
 });
-iphone.listen(8124, '173.230.144.210');
+iphone.listen(8124);
 
