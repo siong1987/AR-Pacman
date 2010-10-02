@@ -87,10 +87,11 @@ var net = require('net'),
 var iphone = net.createServer(function (stream) {
   stream.setEncoding('utf8');
   stream.on('connect', function () {
-    stream.write("{'map':"+JSON.stringify(map)+",'wall':"+JSON.stringify(wall)+"}");
+    stream.write("{'message':'welcome!'}");
     if (globalClient) globalClient.send({"x":1, "y": 2});
   });
   stream.on('data', function (data) {
+    stream.write("{'map':"+JSON.stringify(map)+",'wall':"+JSON.stringify(wall)+"}");
   });
   stream.on('end', function () {
     stream.write('goodbye\r\n');
