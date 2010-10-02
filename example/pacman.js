@@ -25,6 +25,7 @@ function initializeSocket() {
   socket.on('message', function(obj){
     console.log(obj);
     var index = (obj.y-1)*5 + (obj.x);
+    console.log(index);
     for (i=1;i<=25;i++) {
       $("#maze"+index).css("background-image", "url('')");
     }
