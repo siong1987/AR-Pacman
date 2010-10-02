@@ -75,7 +75,7 @@ function initializeSocket() {
     }
     
     if (json_data.type == 5) {
-      var myLatlng = new google.maps.LatLng((json_data.latitude, json_data.longitude);
+      var myLatlng = new google.maps.LatLng(json_data.latitude, json_data.longitude);
       marker.setPosition(myLatlng);
     }
     
