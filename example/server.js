@@ -189,6 +189,9 @@ var iphone = net.createServer(function (stream) {
   stream.on('data', function (data) {
     var json_data = JSON.parse(data);
     if (json_data.type == 1) {
+      player[0] = json_data.x;
+      player[1] = json_data.y;
+      
       globalClient.send(data);
       if (map[json_data.y][json_data.x] == 3)
         map[json_data.y][json_data.x] = 0;
