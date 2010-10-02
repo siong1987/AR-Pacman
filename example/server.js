@@ -78,9 +78,8 @@ var net = require('net'),
 	         [3, 3, 3, 3, 3],
 	         [3, 3, 3, 3, 3],
 	         [3, 3, 3, 3, 3]],
-	 //monster1 = [0, 4],
-	 //monster2 = [1, 3],
-	 monsters = [[0, 4], [1, 3]];
+	 monsters = [[0, 4], [1, 3]],
+	 player = [2, 2],
 	 wall = [[[0, 0], [0, 0], [0, 1], [0, 1], [0, 0]],
 	         [[1, 0], [0, 1], [0, 1], [1, 0], [0, 0]],
 	         [[1, 0], [0, 0], [0, 1], [1, 0], [0, 0]],
@@ -89,8 +88,6 @@ var net = require('net'),
 	         
 function mapJson(mapPara, monsters) {
   var tempMap = mapPara;
-  //tempMap[monA[1]][monA[0]] = 2;
-  //tempMap[monB[1]][monB[0]] = 2;
   for (var i=0; i<monsters.length; i++) {
     tempMap[monsters[i][0]][monsters[i][1]] = 2;
   }
@@ -105,6 +102,15 @@ var iphone = net.createServer(function (stream) {
   stream.write("{\"message\":\"yo!\"}");
   stream.on('connect', function () {
   });
+  
+  setInterval(function () {
+    for (var i=0; i<monsters.length; i++) {
+      monsters[i][0]++;
+      monsters[i][0]++;
+    }
+    stream.write(mapJson(map, monsters));
+  }, 1000);
+  
   stream.on('data', function (data) {
     var json_data = JSON.parse(data);
     if (json_data.type == 1) {
