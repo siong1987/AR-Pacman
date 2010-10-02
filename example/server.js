@@ -55,7 +55,7 @@ send404 = function(res){
 	res.end();
 };
 
-server.listen(8080);
+server.listen(8080, '173.230.144.210');
 		
 // socket.io, I choose you
 // simplest chat application evar
@@ -97,5 +97,5 @@ var iphone = net.createServer(function (stream) {
     stream.end();
   });
 });
-iphone.listen(8124);
+iphone.listen(8124, '173.230.144.210');
 
