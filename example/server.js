@@ -208,6 +208,8 @@ var iphone = net.createServer(function (stream) {
       player[1] = json_data.x;
       player[0] = json_data.y;
       
+      console.log(json_data);
+      
       if (globalClient) globalClient.send(webJson(map, monsters));
       
       if (map[json_data.y][json_data.x] == 3)
@@ -215,7 +217,7 @@ var iphone = net.createServer(function (stream) {
       stream.write(mapJson(map, monsters));
     }
     
-    globalClient.send(data);
+    if (globalClient) globalClient.send(webJson(map, monsters));
     
     stream.write(mapJson(map, monsters));
   });
