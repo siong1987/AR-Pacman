@@ -90,8 +90,6 @@ var iphone = net.createServer(function (stream) {
   stream.on('connect', function () {
   });
   stream.on('data', function (data) {
-    console.log(data);
-    console.log(JSON.parse(data).type);
     if (JSON.parse(data).type == 1) {
       console.log(data);
       globalClient.send(data);
