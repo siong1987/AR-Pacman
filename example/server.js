@@ -73,16 +73,26 @@ io.on('connection', function(client){
 });
 
 var net = require('net'),
-	  map = [[3, 3, 3, 2, 3],
-	         [3, 3, 2, 3, 3],
-	         [3, 2, 3, 3, 3],
-	         [3, 3, 3, 3, 2],
+	  map = [[3, 3, 3, 3, 3],
+	         [3, 3, 3, 3, 3],
+	         [3, 3, 3, 3, 3],
+	         [3, 3, 3, 3, 3],
 	         [3, 3, 3, 3, 3]],
+	 monster1 = [0, 4],
+	 monster2 = [1, 3],
 	 wall = [[[0, 0], [0, 0], [0, 1], [0, 1], [0, 0]],
 	         [[1, 0], [0, 1], [0, 1], [1, 0], [0, 0]],
 	         [[1, 0], [0, 0], [0, 1], [1, 0], [0, 0]],
-	         [[0, 1], [1, 0], [0, 0], [0, 1], [0, 0]],
+	         [[0, 1], [0, 0], [0, 0], [0, 1], [0, 0]],
 	         [[0, 0], [1, 0], [0, 0], [0, 0], [0, 0]]];
+	         
+function mapJson(mapPara, monA, monB) {
+  var tempMap = mapPara;
+  tempMap[monA[1]][monA[2]] = 2;
+  tempMap[monB[1]][monB[2]] = 2;
+  
+  return "{\"map\":"+JSON.stringify(tempMap)+",\"wall\":"+JSON.stringify(wall)+"}\0";
+};
 	 
 var iphone = net.createServer(function (stream) {
   stream.setEncoding('utf8');
@@ -97,10 +107,10 @@ var iphone = net.createServer(function (stream) {
       if (map[json_data.y][json_data.x] == 3)
         map[json_data.y][json_data.x] = 0;
       console.log(map);
-      stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}\0");
+      stream.write(mapJson(map, monster1, monster2));
     }
     
-    stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}\0");
+    stream.write(mapJson(map, monster1, monster2));
   });
   stream.on('end', function () {
     stream.write('goodbye\r\n');
