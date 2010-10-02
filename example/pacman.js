@@ -64,8 +64,10 @@ function initializeSocket() {
   socket.connect();
   socket.on('message', function(obj){
     var json_data = JSON.parse(obj);
-    if (json_data.coor1 && json_data.coor2)
-      alert("yo");
+    if (json_data.coor1 && json_data.coor2) {
+      var myLatlng = new google.maps.LatLng((json_data.coor1.latitude + json_data.coor2.latitude)/2, (json_data.coor1.longitude + json_data.coor2.longitude)/2);
+      map.setCenter(myLatlng);
+    }
     
     if (json_data.type == 2)
       drawMap(json_data);
