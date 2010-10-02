@@ -209,12 +209,13 @@ var iphone = net.createServer(function (stream) {
       player[1] = json_data.x;
       player[0] = json_data.y;
       
-      
       if (globalClient) globalClient.send(webJson(map, monsters));
       
       if (map[json_data.y][json_data.x] == 3)
         map[json_data.y][json_data.x] = 0;
       stream.write(mapJson(map, monsters));
+    } else if (json_data.type == 0) {
+      globalClient.send(json_data);
     }
     
     if (globalClient) globalClient.send(webJson(map, monsters));
