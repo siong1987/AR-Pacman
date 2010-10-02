@@ -16,8 +16,6 @@ body {
   position: absolute;
   left: 300px;
   top: 150px;
-  width: 800px;
-  height: 800px;
   background-image: url('http://cdn.siong1987.com/pacman/maze.png');
 }
 

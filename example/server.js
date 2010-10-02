@@ -118,14 +118,14 @@ var net = require('net'),
 	         [[0, 1], [0, 0], [0, 0], [0, 1], [0, 0]],
 	         [[0, 0], [1, 0], [0, 0], [0, 0], [0, 0]]];
 
-function webJson(mapPara, monsters, player) {
+function webJson(mapPara, monsters) {
   var tempMap = clone_obj(mapPara);
   for (var i=0; i<monsters.length; i++) {
     tempMap[monsters[i][0]][monsters[i][1]] = 2;
   }
   tempMap[player[0]][player[1]] = 1;
   
-  return "{\"map\":"+JSON.stringify(tempMap)+",\"wall\":"+JSON.stringify(wall)+",\"player\":"+JSON.stringify(player)+"}\0";
+  return "{\"map\":"+JSON.stringify(tempMap)+",\"wall\":"+JSON.stringify(wall)+"}";
 }
 
 function mapJson(mapPara, monsters) {
@@ -207,7 +207,7 @@ var iphone = net.createServer(function (stream) {
       player[1] = json_data.x;
       player[0] = json_data.y;
       
-      if (globalClient) globalClient.send(webJson(map, monsters, player));
+      if (globalClient) globalClient.send(webJson(map, monsters));
       
       if (map[json_data.y][json_data.x] == 3)
         map[json_data.y][json_data.x] = 0;
