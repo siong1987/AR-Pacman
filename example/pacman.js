@@ -8,7 +8,7 @@ $(document).ready(function() {
 function initializeMap(map_canvas) {
   var myLatlng = new google.maps.LatLng(40.11176, -88.22704);
   var myOptions = {
-    zoom: 20,
+    zoom: 21,
     center: myLatlng,
     disableDoubleClickZoom: false,
     navigationControl: false,
