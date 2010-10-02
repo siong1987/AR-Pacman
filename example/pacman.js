@@ -23,6 +23,12 @@ function drawMap(json_object) {
   var canvas = document.getElementById("maze");  
   var ctx = canvas.getContext("2d");  
   ctx.clearRect(0,0,800,800);
+  
+  ctx.fillStyle = "rgb(80,80,80)";
+  ctx.fillRect(0, 0, 800, 8);
+  ctx.fillRect(0, 792, 800, 8);
+  ctx.fillRect(0, 0, 8, 800);
+  ctx.fillRect(792, 0, 8, 800);
 
   for(i=0;i<5;i++) {
     for(j=0;j<5;j++) {
@@ -31,14 +37,21 @@ function drawMap(json_object) {
       if (point == 0) {
         
       } else if (point == 1) {
-        ctx.fillStyle = "rgba(200,0,0,0.5)";
-        ctx.fillRect(10+j*160, 10+i*160, 140, 140);
+        ctx.drawImage(document.getElementById('pacman'),30+j*160,30+i*160, 100, 100);
       } else if (point == 2) {
-        ctx.fillStyle = "rgba(0,0,200,0.5)";
-        ctx.fillRect(10+j*160, 10+i*160, 140, 140);
+        ctx.drawImage(document.getElementById('monster'),30+j*160,30+i*160, 100, 100);
       } else if (point == 3) {
-        ctx.fillStyle = "rgba(0,200,0,0.5)";
-        ctx.fillRect(10+j*160, 10+i*160, 140, 140);
+        ctx.drawImage(document.getElementById('source'),30+j*160,30+i*160, 100, 100);
+      }
+      
+      ctx.fillStyle = "rgb(80,80,80)";
+      wall = json_object.wall[i][j];
+      if (wall[0] == 1) {
+        ctx.fillRect(152+j*160, i*160, 16, 160);
+      }
+      
+      if (wall[1] == 1) {
+        ctx.fillRect(j*160, 152+i*160, 160, 16);
       }
     }
   }
