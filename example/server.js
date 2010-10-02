@@ -93,15 +93,15 @@ function clone_obj(obj) {
             c[i].push(clone_obj(prop[j]));
           }
         }
-           } else {
-               c[i] = clone_obj(prop);
-           }
-        } else {
-           c[i] = prop;
-        }
+      } else {
+        c[i] = clone_obj(prop);
+      }
+    } else {
+      c[i] = prop;
     }
+  }
  
-    return c;
+  return c;
 };
 
 var net = require('net'),
@@ -128,6 +128,29 @@ function mapJson(mapPara, monsters) {
   
   return "{\"map\":"+JSON.stringify(tempMap)+",\"wall\":"+JSON.stringify(wall)+"}\0";
 };
+
+function sgn(x) {
+  if (x>0)
+    return 1;
+  else if(x<0)
+    return -1;
+  return 0;
+}
+
+function canwalk(x, y, dx, dy) {
+  var x2 = x+dx, y2 = y+dy;
+  if (x2<0 ||  x2>=5 || y2<0 || y2>=5)
+    return false;
+  if (dx < 0)
+    return !wall[y][x-1][0];
+  if (dx > 0)
+    return !wall[y][x][0];
+  if (dy < 0)
+    return !wall[y-1][x][1];
+  if (dy > 0)
+    return !wall[y][x][1];
+  return yes;
+}
 	 
 var iphone = net.createServer(function (stream) {
   stream.setEncoding('utf8');
@@ -137,7 +160,28 @@ var iphone = net.createServer(function (stream) {
   
   setInterval(function () {
     for (var i=0; i<monsters.length; i++) {
-      monsters[i][0]++;
+      //monsters[i][0]++;
+      var tries = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+      var x = monsters[i][1], y = monsters[i][0];
+      var dx = sgn(player[1]-monsters[i][1]);
+      var dy = sgn(player[0]-monsters[i][0]);
+      
+      if (dx == 0 || dy == 0) {
+        tries.push([dy, dx]);
+      } else {
+        tries.push([dy, 0]);
+        tries.push([0, dx]);
+      }
+      
+      for (var j=tries.length-1; j>=0; j--) {
+        if (canwalk(x, y, tries[j][1], tries[j][0])) {
+          x += tries[j][1]; y += tries[j][0];
+          break;
+        }
+      }
+      
+      monsters[i][1] = x;
+      monsters[i][0] = y;
     }
     stream.write(mapJson(map, monsters));
   }, 1000);
