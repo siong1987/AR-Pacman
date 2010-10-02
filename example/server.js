@@ -93,8 +93,7 @@ var iphone = net.createServer(function (stream) {
   stream.on('data', function (data) {
     console.log(data);
     console.log("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}");
-    stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}");
-    stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}");
+    stream.write("{\"map\":"+JSON.stringify(map)+",\"wall\":"+JSON.stringify(wall)+"}\0");
   });
   stream.on('end', function () {
     stream.write('goodbye\r\n');
