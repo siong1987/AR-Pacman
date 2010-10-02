@@ -26,8 +26,7 @@ function initializeSocket() {
     console.log(JSON.parse(obj).y);
     var index = (JSON.parse(obj).y)*5 + (JSON.parse(obj).x + 1);
     for (i=1;i<=25;i++) {
-      console.log("clean");
-      $("#maze"+index).css("background-image", "url('http://cdn.siong1987.com/pacman/empty.png')");
+      $("#maze"+i).css("background-image", "url('http://cdn.siong1987.com/pacman/empty.png')");
     }
     $("#maze"+index).css("background-image", "url('http://cdn.siong1987.com/pacman/maze.png')");
   });
