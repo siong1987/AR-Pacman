@@ -106,7 +106,6 @@ var iphone = net.createServer(function (stream) {
   setInterval(function () {
     for (var i=0; i<monsters.length; i++) {
       monsters[i][0]++;
-      monsters[i][0]++;
     }
     stream.write(mapJson(map, monsters));
   }, 1000);
